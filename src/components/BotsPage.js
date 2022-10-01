@@ -12,26 +12,32 @@ function BotsPage() {
       .then((data) => setBots(data));
   }, []);
   
-  function enlistBots(bot){
-     console.log(bot)
-     setBots(bots.map(b => b.id === bot.id ? {...b, army:true} : b));
-  };
-  function handleDelete(bot){
-    console.log('deleted')
-    setBots(bots.filter(b => b.id !== bot.id))
+    function removeBot(bot){
+      setBots(bots.map(b => b.id === bot.id ? {...b } : b));
 
-  };
+    }
+
+    function enlistBots(bot){
+      setBots(bots.map(b => b.id === bot.id ? {...b} : b));
+
+    }
+    function handleDelete(bot){
+      setBots(bots.filter(b => b.id !== bot.id))
+    }
+  
   return (
     <div>
-      <YourBotArmy 
-        
-        />
+      <YourBotArmy  
+        bots={bots.filter(b => b.army)} 
+        removeBot={removeBot} 
+        selectedBot={enlistBots}
+      />
 
-
+       
       <BotCollection 
-         bots={bots} 
-         enlistBots={enlistBots} 
-        handleDelete={handleDelete}
+        bots={bots} 
+        handleDelete={handleDelete} 
+        enlistBots={enlistBots} 
       />
     </div>
   )

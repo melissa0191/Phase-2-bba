@@ -10,6 +10,7 @@ const botTypeClasses = {
 };
 
 function BotCard({ bot,enlistBots,handleDelete }) {
+ 
   return (
     <div className="ui column">
       <div
@@ -47,8 +48,8 @@ function BotCard({ bot,enlistBots,handleDelete }) {
             <div className="ui center aligned segment basic">
               <button
                 className="ui mini red button"
-                onClick={() =>{
-                  
+                onClick={(e) =>{
+                  e.stopPropagation();
                    handleDelete(bot)
                 }
                   
