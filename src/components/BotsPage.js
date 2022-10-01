@@ -13,12 +13,12 @@ function BotsPage() {
   }, []);
   
     function removeBot(bot){
-      setBots(bots.map(b => b.id === bot.id ? {...b } : b));
+      setBots(bots.map(b => b.id === bot.id ? {...b, army:false} : b));
 
     }
 
     function enlistBots(bot){
-      setBots(bots.map(b => b.id === bot.id ? {...b} : b));
+      setBots(bots.map(b => b.id === bot.id ? {...b,army:true} : b));
 
     }
     function handleDelete(bot){
