@@ -13,22 +13,22 @@ function BotsPage() {
   }, []);
   
     function removeBot(bot){
-      setBots(bots.map(b => b.id === bot.id ? {...b, army:false} : b));
-
+     const removeFromList= bots.map(singleBot => singleBot.id === bot.id ? {...singleBot, yourArmy:false} : singleBot);
+       setBots(removeFromList);
     }
 
     function enlistBots(bot){
-      setBots(bots.map(b => b.id === bot.id ? {...b,army:true} : b));
-
+    const selecting= bots.map(singleBot => singleBot.id === bot.id ? {...singleBot,yourArmy:true} : singleBot);
+      setBots(selecting );
     }
     function handleDelete(bot){
-      setBots(bots.filter(b => b.id !== bot.id))
+      setBots(bots.filter(oneBot => oneBot.id !== bot.id))
     }
   
   return (
     <div>
       <YourBotArmy  
-        bots={bots.filter(b => b.army)} 
+        bots={bots.filter(oneBot => oneBot.yourArmy)} 
         removeBot={removeBot} 
         selectedBot={enlistBots}
       />
