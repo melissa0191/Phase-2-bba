@@ -5,6 +5,7 @@ import BotCollection from "./BotCollection";
 function BotsPage() {
   //start here with your code for step one
   const [bots, setBots]= useState([])
+  //const [showForm, setShowForm] = useState(false);
 
   useEffect(() => {
     fetch("http://localhost:8002/bots")
@@ -22,8 +23,18 @@ function BotsPage() {
       setBots(selecting );
     }
     function handleDelete(bot){
-      setBots(bots.filter(oneBot => oneBot.id !== bot.id))
+      const filterbots=bots.filter(oneBot => oneBot.id !== bot.id);
+      const   deleting =  {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        } 
+     }
+      fetch(`http://localhost:8002/bots/${bot.id}`,deleting)
+       .then(()=>setBots(filterbots))   
     }
+    
+   // From BotArmy it removes from the list  and from bot collection it delete permanently amazing 
   
   return (
     <div>
@@ -37,7 +48,8 @@ function BotsPage() {
       <BotCollection 
         bots={bots} 
         handleDelete={handleDelete} 
-        enlistBots={enlistBots} 
+        enlistBots={enlistBots}
+       
       />
     </div>
   )
