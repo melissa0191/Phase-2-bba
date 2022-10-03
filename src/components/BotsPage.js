@@ -4,8 +4,8 @@ import BotCollection from "./BotCollection";
 
 function BotsPage() {
   //start here with your code for step one
-  const [bots, setBots]= useState([])
-  //const [showForm, setShowForm] = useState(false);
+  const [bots, setBots]= useState([]);
+  const [boting,setBoting]=useState([]);
 
   useEffect(() => {
     fetch("http://localhost:8002/bots")
@@ -14,13 +14,15 @@ function BotsPage() {
   }, []);
   
     function removeBot(bot){
-     const removeFromList= bots.map(singleBot => singleBot.id === bot.id ? {...singleBot, yourArmy:false} : singleBot);
-       setBots(removeFromList);
+     const  removeFromList = boting.filter((singleBot)=> singleBot.id !==bot.id)
+       setBoting(removeFromList);
     }
 
     function enlistBots(bot){
-    const selecting= bots.map(singleBot => singleBot.id === bot.id ? {...singleBot,yourArmy:true} : singleBot);
-      setBots(selecting );
+      const selecting = boting.find((bott)=>bott.id === bot.id)  
+      if (!selecting){
+       setBoting(bots=>[...bots,bot])
+      }   
     }
     function handleDelete(bot){
       const filterbots=bots.filter(oneBot => oneBot.id !== bot.id);
@@ -30,8 +32,11 @@ function BotsPage() {
           "Content-Type": "application/json",
         } 
      }
+      const removeFromArmy= boting.filter((bo)=>bo.id !==bot.id)
       fetch(`http://localhost:8002/bots/${bot.id}`,deleting)
-       .then(()=>setBots(filterbots))   
+       .then(()=>setBots(filterbots))
+              setBoting(removeFromArmy)
+        
     }
     
    // From BotArmy it removes from the list  and from bot collection it delete permanently amazing 
@@ -39,9 +44,9 @@ function BotsPage() {
   return (
     <div>
       <YourBotArmy  
-        bots={bots.filter(oneBot => oneBot.yourArmy)} 
-        removeBot={removeBot} 
-        selectedBot={enlistBots}
+        bots={boting} 
+        selectedBot={removeBot} 
+        handleDelete ={handleDelete}
       />
 
        

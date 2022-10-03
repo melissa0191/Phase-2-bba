@@ -1,7 +1,7 @@
 import React from "react";
 import BotCard from "./BotCard";
 
-function YourBotArmy({bots,selectedBot,removeBot}) {
+function YourBotArmy({bots,selectedBot,handleDelete}) {
   //your bot army code here...
  
   const  showBots= bots.map(bot=>{
@@ -9,7 +9,7 @@ function YourBotArmy({bots,selectedBot,removeBot}) {
       <BotCard
       key={bot.id}
       bot ={bot}
-      handleDelete={removeBot}
+      handleDelete={handleDelete}
       enlistBots={selectedBot}
       />  
     )

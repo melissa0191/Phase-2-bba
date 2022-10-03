@@ -10,8 +10,9 @@ function BotCollection({bots,handleDelete,enlistBots}) {
       <BotCard
       key={bot.id}
       bot ={bot}
-      handleDelete={handleDelete}
       enlistBots={enlistBots}
+      handleDelete={handleDelete}
+      
       />  
     )
   })

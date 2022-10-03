@@ -16,7 +16,7 @@ function BotCard({ bot,enlistBots,handleDelete }) {
       <div
         className="ui card"
         key={bot.id}
-        onClick={() =>enlistBots(bot) }
+        onClick={() => enlistBots(bot) }
       >
         <div className="image">
           <img alt="oh no!" src={bot.avatar_url} />
